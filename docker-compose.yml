@@ -1,0 +1,97 @@
+---
+version: "3.0"
+services:
+
+  gitlab:
+    build:
+      dockerfile: build/gitlab/Dockerfile
+      args:
+        ext_image_version: $EXT_IMG_VERSION_GITLAB
+    image: cicd_demo/gitlab:$IMG_VERSION_GITLAB
+    container_name: orchestrator_gitlab
+    restart: always
+
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+          gitlab_rails['initial_root_password'] = 'C1sco12345'
+          gitlab_rails['gitlab_shell_ssh_port'] = 2022
+          gitlab_rails['monitoring_whitelist'] = ['0.0.0.0/0']
+          gitlab_rails['initial_shared_runners_registration_token'] = 'r3g1str4t10n'
+      DEFAULT_EMAIL: $DEFAULT_EMAIL
+      DEFAULT_NAME: $DEFAULT_NAME
+      DEFAULT_USER: $DEFAULT_USER
+      DEFAULT_PASS: $DEFAULT_PASS
+      DEFAULT_PROJECT_NAME: $DEFAULT_PROJECT_NAME
+      DEFAULT_BRANCH_NAME: $DEFAULT_BRANCH_NAME
+      GITLAB_URL: $GITLAB_URL
+      GITLAB_HOST: $GITLAB_HOST
+      RESOURCE_NAME: $RESOURCE_NAME
+      API_TOKEN: $API_TOKEN
+    ports:
+      - "2443:443"
+      - "2080:80"
+      - "2022:22"
+    volumes:
+      - "gitlab_config:/etc/gitlab"
+      - "gitlab_logs:/var/log/gitlab"
+      - "gitlab_data:/var/opt/gitlab"
+      - "gitlab_content:/home/data"
+    networks:
+      frontend:
+      backend:
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/-/readiness"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  gitlab-runner:
+    build:
+      dockerfile: build/gitlab_runner/Dockerfile
+    container_name: engine_gitlab
+    image: cicd_demo/gitlab-runner:$IMG_VERSION_RUNNER
+    restart: always
+    depends_on:
+      - gitlab
+    environment:
+      RUNNER_SHELL: $RUNNER_SHELL
+      RUNNER_EXECUTOR: $RUNNER_EXECUTOR      
+      RUNNER_NAME: $RUNNER_NAME
+      CI_SERVER_URL: $CI_SERVER_URL
+      CLONE_URL: $CLONE_URL
+      REGISTRATION_TOKEN: $REGISTRATION_TOKEN
+      REGISTER_NON_INTERACTIVE: true
+    volumes:
+      - "runner_config:/etc/gitlab-runner"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    command: tail -f /dev/null
+    networks:
+      backend:
+
+  devtools:
+    container_name: engine_devtools
+    build:
+      dockerfile: build/devtools/Dockerfile
+    image: cicd_demo/devtools:${IMG_VERSION_DEVTOOLS}
+    volumes:
+      - devtools_home:/devtools/playbooks
+    networks:
+      backend:
+
+volumes:
+
+  devtools_home:
+  runner_config:
+  gitlab_config:
+  gitlab_logs:
+  gitlab_data:
+  gitlab_content:
+    driver: local
+    driver_opts:
+      type: none
+      device: $PWD/content
+      o: bind
+
+networks:
+  backend:
+  frontend:
