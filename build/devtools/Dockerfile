@@ -19,13 +19,16 @@ RUN \
   curl \
   bash \
   ansible \
+  gcc \
+  python3-dev \
   python3-pip && \
   rm -rf /var/lib/apt/lists/* && \
   echo "===> Adding localhost ..."  && \
   mkdir /etc/ansible/ /ansible && \
   echo "[local]\nlocalhost ansible_connection=local" > /etc/ansible/hosts && \
   echo "===> Adding playbooks volume ..."  && \
-  mkdir -p /ansible/playbooks
+  mkdir -p /ansible/playbooks && \
+  pip3 install pyats
 
 WORKDIR /ansible/playbooks
 
