@@ -36,7 +36,7 @@
     -	Validation 
         -	Add linter for validation(?)
         -	PyATS check device state
-###	Closure/Summary - 10
+###	Closure/Summary - 10 minutes
     -	Overview of concepts
     -	Example of use cases
     -	Review of different approaches (CLI, simple tools, simple pipelines, advanced pipelines)

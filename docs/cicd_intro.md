@@ -12,3 +12,4 @@ Continuous Integration Pipelines usually start with a Source Code Management (SC
   5. (Deploy) - Code could be automatically deployed into production or staging environments - this last part then makes it a **Continous Delivery** (CD) process.
 
 In this workshop we are going to have a look at such a CI/CD pipeline from the ground up. But in order to continously deliver code we first need *code*.
+

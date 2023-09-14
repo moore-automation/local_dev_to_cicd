@@ -20,3 +20,7 @@ Next, we will progress and examine different tools and processes that will suppo
 
 In the second section we will create different stages for our pipeline that will handle different things for us. We will have different environments to deploy our changes to - to test and examine them and their impact.
 With all these previous building blocks, you will bring everything together: From centralized files pushed, tested and deployed through your pipeline into your environment.
+
+## Topology
+
+![Topology](assets/topology.png)
