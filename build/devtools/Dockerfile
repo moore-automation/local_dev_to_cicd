@@ -35,4 +35,4 @@ WORKDIR /ansible/playbooks
 COPY /content/Ansible .
 VOLUME /ansible/playbooks 
 
-CMD ["/bin/bash"]
+ENTRYPOINT ["tail", "-f", "/dev/null"]

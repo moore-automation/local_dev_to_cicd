@@ -1,38 +1,27 @@
-# Overview
+# Introduction to our Project
 
-This project originated through a collaboration with CSS Automation members to build an ‘Automation+in+a+box’ solution to be used as a base architecture for Automation use cases. In 2022, it was selected as part of the CX EMEA 'Communities of Practice' initiative. Currently the solution automatically builds a variety of components which is then used to adress multiple use cases.
+Don't worry - you are not expecting to come up with a project from the ground up. Instead we'll be working on a small sample project that you can find in [this](https://github.com/moore-automation/local_dev_to_cicd) repository.
 
- Components:
+For this first small project, we will take network device configuration as an example of version-controlled files that will be applied to the devices in our environment through our pipeline later.
 
-+ Jenkins
-+ Gitlab
-+ Ansible
-+ Terraform
-+ Webex Bot (Flask based)
-+ TIG (Telegraf, InfluxDB, Grafana)
+## Prerequisites
 
- Use Cases:
+To follow this Workshop you should have these things:
 
-+ DNAC Custom Reporting
-+ CI/CD – [ DNAC, VMware and ACI.]
-+ Webex Chat bot
-+ (Future) Automated Testing
-+ (Future) Network Visibility
+- Docker (covered in previous Hands-On session)
+- GitLab Account to save the project in a repo
+- VPN Client for connection to dCloud (AnyConnect)
 
-## Scope
+## The Project
 
-We have an accelerated demand from our customers to rapidly deliver automation use cases, with multivendor technologies to ensure our solutions meet +their+ needs. To fulfill this we need modular frameworks to run automation use cases on our laptops or in development environments.
+In this project, we will work through different approaches of network device configuration and their principiles.
 
-+ Business Case
-  + We need to make educating/advising customers simple, efficient and low cost.
-  + We need to enable technical staff to upskill with *modern* automation techniques.
-+ CX Issues
-  + There are currently limited labs available for Automation use cases.
-  + CSS are assessed on utilization or case metrics with time limitations on activities.
-+ Customer Issues
-  + Often require advice on a range of topics including Automation strategy as well as specific implementations.
-  + Pressured to deliver value with multi+faceted requirements and specific constraints.
-+ Solution
-  + Produce a basic framework to address the majority of these challenges.
-  + Prioritise extensibility to simplify developing use cases in a standardised way with a singular platform.
-  + Build in a modular way with reduced performance requirements that can be run on a laptop or other lower performance platforms.
+In the first section, we will start with the classic manual method of on-device CLI configuration - the good old reliable.
+Next, we will progress and examine different tools and processes that will support us - doing these changes for us. Afterwards we will shed the light on the centralized approach using a project in GitLab and start to build the foundation for our fully automated pipeline. 
+
+In the second section we will create different stages for our pipeline that will handle different things for us. We will have different environments to deploy our changes to - to test and examine them and their impact.
+With all these previous building blocks, you will bring everything together: From centralized files pushed, tested and deployed through your pipeline into your environment.
+
+## Topology
+
+![Topology](assets/topology.png)
