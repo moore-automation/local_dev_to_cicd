@@ -30,7 +30,7 @@ The below topology details the dCloud instance we'll used as part of this lab:
 
 - Access: Provided via an AnyConnect VPN and will be provided by your breakout proctor.
 - Ubuntu VM: Hosts the Automation components.
-- Catalyst 9K: There are two Cat9K instances which will represent a development and production switch.
+- Catalyst VM: There are two Cat9K instances which will represent a development and production switch.
 
 ![Topology](assets/topology.png)
 

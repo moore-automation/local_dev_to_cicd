@@ -1,0 +1,21 @@
+site_name: Local Development to CICD
+site_url: https://moore-automation.github.io/local_dev_to_cicd/
+site_description: Lab Overview
+site_author: Ed Moore & Frederic Wagner
+
+repo_url: https://github.com/moore-automation/local_dev_to_cicd
+edit_uri: blob/main/docs/
+
+theme:
+  name: mkdocs
+  locale: en
+  highlightjs: true
+  hljs_languages:
+    - yaml
+    - django
+
+nav:
+  - Home: index.md
+  - Agenda: agenda.md
+  - CI/CD Introduction: cicd_intro.md
+
