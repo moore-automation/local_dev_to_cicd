@@ -1,0 +1,5 @@
+---
+interfaces:
+  - name: GigabitEthernet1
+    description: Configured and Replaced by Ansible
+    enabled: true

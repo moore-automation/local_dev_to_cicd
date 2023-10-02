@@ -1,0 +1,10 @@
+switches:
+  hosts:
+    cat9kv01-dev:
+        ansible_host: 198.18.132.151 
+    cat9kv02-prod:
+        ansible_host: 198.18.132.152
+  vars:
+    ansible_network_os: ios
+    ansible_user: admin
+    ansible_password: C1sco12345

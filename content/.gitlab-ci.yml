@@ -1,0 +1,55 @@
+########################################################################################
+# To do
+#  Add stage for development and production
+# get a sample ansible playbook working
+# get a dummy pyats working 
+# Create before and after playbooks
+# Update for ci to work 
+# First task assumed to run within devtools
+# Second to run within gitlab.ci 
+
+
+########################################################################################
+
+
+---
+
+stages:
+  - validate
+  - test
+  - deploy
+
+########################################################################################
+# network_request app jobs
+########################################################################################
+
+# Validate code format and syntax
+format-check:
+  stage: validate
+  image: python:3.9
+  script:
+    - pip install -e .
+    - pip install -e '.[test]'
+    - black --check network_request
+    - black --check tests
+
+lint:
+  stage: validate
+  image: python:3.9
+  script:
+    - pip install -e .
+    - pip install -e '.[test]'
+    - flake8 network_request
+
+# Run the Python tests against the network_request application
+run_pytest:
+  stage: test
+  image: python:3.9
+
+
+  config_update:
+    stage: deploy
+    variables:
+      ANSIBLE_HOST_KEY_CHECKING: "False"
+    script:
+      - ansible-playbook -i inventory -u root --private-key "$SSH_PRIVATE_KEY" playbook.yml -vv

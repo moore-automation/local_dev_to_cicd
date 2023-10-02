@@ -1,0 +1,27 @@
+---
+
+- name: Cisco Interface Example
+  hosts: switches
+  gather_facts: false
+
+  tasks:
+
+    - name: Replaces device configuration of listed interfaces with provided configuration
+      cisco.ios.ios_interfaces:
+        config:
+        - name: "{{ item.name }}"
+          description: "{{ item.name  }}: {{ item.description }}"
+          enabled: "{{ item.enabled }}"
+      with_items: "{{ interfaces }}"
+
+    - name: Check Running Configuration 
+      ios_command:
+        commands: show run interface {{ interface }}
+        register: post_change
+        with_items: "{{ interfaces }}"
+
+    - debug: var=post_change
+
+    - debug: msg="Update Configuration  - {{item}}"
+      when: item.changed == true
+      with_items: "{{post_change.results}}"
