@@ -9,6 +9,9 @@ edit_uri: blob/main/docs/
 theme:
   name: material
   locale: en
+  features:
+    - content.code.copy
+    - content.code.select
 
 nav:
   - Home: index.md
@@ -18,10 +21,10 @@ nav:
   - Hands-On 1: hands_on_01.md
 
 markdown_extensions:
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
   - pymdownx.highlight:
       anchor_linenums: true
       line_spans: __span
       pygments_lang_class: true
-  - pymdownx.inlinehilite
-  - pymdownx.snippets
-  - pymdownx.superfences

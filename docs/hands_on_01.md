@@ -14,7 +14,7 @@ If you have trouble doing this on your own you can find the solution down below.
 
 <summary>Click here to show solution</summary>
   
-  ```bash linenums="1"
+  ```bash linenums="1" title="Manual Configuration Example"
       Cat9kv-01#
 
       # Let's check the current interface config
