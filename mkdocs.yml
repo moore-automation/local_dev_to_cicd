@@ -14,4 +14,6 @@ nav:
   - Home: index.md
   - Agenda: agenda.md
   - CI/CD Introduction: cicd_intro.md
+  - Lab Setup: lab_setup_connect.md
+  - Hands-On 1: hands_on_01.md
 
