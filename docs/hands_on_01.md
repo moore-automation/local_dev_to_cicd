@@ -5,7 +5,7 @@ Now, we will start to make our first changes to our config and build the foundat
 First, go ahead and make a manual change to the configuration of the interface that has been assigned to you.
 
 For this, you can connect to the **dev** Switch on 198.18.132.151 via SSH. 
-You will find yourself on the command line with the enabled prompt **#**
+You will find yourself on the command line with the enabled prompt **`#`**
 
 Your first task is to go into the configuration mode and change the description of your assigned interface. Maybe you could mark it with your name?
 
@@ -14,6 +14,7 @@ If you have trouble doing this on your own you can find the solution down below.
   <summary>Click here to show solution</summary>
   
   ```
+
     Cat9kv-01#
 
     # Let's check the current interface config
@@ -28,12 +29,12 @@ If you have trouble doing this on your own you can find the solution down below.
     interface GigabitEthernet1/0/2
     interface GigabitEthernet1/0/3
     ...
+
     Cat9kv-01#
     Cat9kv-01#conf t
     Cat9kv-01(config)#interface GigabitEthernet 1/0/1 
     Cat9kv-01(config-if)#description Configured manually by frewagne
     Cat9kv-01(config-if)#end
-    Cat9kv-01#
 
     # Now check the config of the interfaces again
 
