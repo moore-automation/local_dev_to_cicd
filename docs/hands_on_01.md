@@ -14,7 +14,6 @@ If you have trouble doing this on your own you can find the solution down below.
   <summary>Click here to show solution</summary>
   
   ```
-
     Cat9kv-01#
 
     # Let's check the current interface config
@@ -49,7 +48,6 @@ If you have trouble doing this on your own you can find the solution down below.
     interface GigabitEthernet1/0/2
     interface GigabitEthernet1/0/3
     ...
-
   ```
 </details>
 
