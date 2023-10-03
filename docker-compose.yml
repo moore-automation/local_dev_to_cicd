@@ -74,7 +74,7 @@ services:
       dockerfile: build/devtools/Dockerfile
     image: cicd_demo/devtools:${IMG_VERSION_DEVTOOLS}
     volumes:
-      - devtools_home:/devtools/playbooks
+      - devtools_home:/devtools/
     networks:
       backend:
 
