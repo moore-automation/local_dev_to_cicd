@@ -144,8 +144,3 @@ dummy-job:
     script:
         - echo "This pipeline is triggered successfully!"
 ```
-
-#TODO
--	Add files to project
--	Create CI file
--	Test commit
