@@ -35,7 +35,15 @@ deploy_dev:
   only:
     - master
 
-
+test_infra:
+  stage: testing
+  script:
+    - cd pyATS
+    - echo 'Insert pyATS commands'
+  needs: 
+    - deploy_dev
+  only:
+    - master
 
 deploy_prod:
   stage: deploy
@@ -43,6 +51,6 @@ deploy_prod:
     - cd Ansible
     - ansible-playbook -i inventory -e 'devices=production' playbooks/interface_update.yml
   needs: 
-    - deploy_dev
+    - test_infra
   only:
     - master
