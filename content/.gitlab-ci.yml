@@ -47,9 +47,9 @@ run_pytest:
   image: python:3.9
 
 
-  config_update:
-    stage: deploy
-    variables:
-      ANSIBLE_HOST_KEY_CHECKING: "False"
-    script:
-      - ansible-playbook -i inventory -u root --private-key "$SSH_PRIVATE_KEY" playbook.yml -vv
+config_update:
+  stage: deploy_dev
+  variables:
+    ANSIBLE_HOST_KEY_CHECKING: "False"
+  script:
+    - ansible-playbook -i inventory -u root playbooks/interface_update.yml -vv

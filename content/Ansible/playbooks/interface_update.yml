@@ -1,7 +1,7 @@
 ---
 
 - name: Cisco Interface Example
-  hosts: switches
+  hosts: '{{ all | default("switches") }}'
   gather_facts: false
 
   tasks:
@@ -16,12 +16,12 @@
 
     - name: Check Running Configuration 
       ios_command:
-        commands: show run interface {{ interface }}
+        commands: show run interface {{ item.name }}
         register: post_change
         with_items: "{{ interfaces }}"
 
     - debug: var=post_change
 
-    - debug: msg="Update Configuration  - {{item}}"
+    - debug: msg="Update Configuration - {{item.stdout}}"
       when: item.changed == true
       with_items: "{{post_change.results}}"
