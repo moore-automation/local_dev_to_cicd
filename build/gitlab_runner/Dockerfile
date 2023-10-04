@@ -7,10 +7,7 @@ RUN chmod +x /docker-entrypoint.sh
 RUN \
   echo "===> Update and Install packages..."  && \
   apt-get update && apt-get -y install --no-install-recommends\
-  apt-transport-https \
   ca-certificates \
-  curl \
-  bash \
   ansible \
   gcc \
   python3-dev \

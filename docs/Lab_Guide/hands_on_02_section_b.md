@@ -25,7 +25,7 @@ deploy_dev:
   needs: 
     - yamllint
   only:
-    - main
+    - master
 
 ```
 
@@ -45,7 +45,7 @@ deploy_prod:
   needs: 
     - yamllint
   only:
-    - main    
+    - master    
 ```
 
 </details>

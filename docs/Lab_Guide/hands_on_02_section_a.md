@@ -103,15 +103,17 @@ deploy_infra:
 
 ## Branch Specific Policies
 
-As a project expands it in nearly all cases becomes necessary to create branches when working across diverse teams or nfrastructure - making changes directly to main is in fact considered bad practice as it inceases complexity when resolving `merge conflicts` and approving `pull requests.` Typically we would recommend creating function specific branches to avoid these issues. 
+As a project expands it in nearly all cases becomes necessary to create branches when working across diverse teams or nfrastructure - making changes directly to master is in fact considered bad practice as it inceases complexity when resolving `merge conflicts` and approving `pull requests.` Typically we would recommend creating function specific branches to avoid these issues. 
 
-In most production instances would will see increased restrictions around branches that are permitted to make changes to 'protected' resources - a simple example is that you can only make changes to production from the main or 'prod' branch, and you can only push changes to that branch after review from your peers.
+In most production instances would will see increased restrictions around branches that are permitted to make changes to 'protected' resources - a simple example is that you can only make changes to production from the master or 'prod' branch, and you can only push changes to that branch after review from your peers.
 
-In our example we're going to use the `only:` parameter to ensure that only changes from main can execute this job.
+In our example we're going to use the `only:` parameter to ensure that only changes from master can execute this job.
 
 ### Task - Branch policy
 
-1. Similar to the needs parameter, update deploy_infra to only execute from the main branch.
+1. Similar to the needs parameter, update deploy_infra to only execute from the master branch.
+
+
 
 <details><summary>Click here to show solution</summary>
 
@@ -124,7 +126,7 @@ deploy_infra:
   needs: 
     - yamllint    
   only:
-    - main
+    - master
 ```
 
 </details>
