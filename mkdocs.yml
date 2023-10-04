@@ -16,9 +16,17 @@ theme:
 nav:
   - Home: index.md
   - Agenda: agenda.md
-  - CI/CD Introduction: cicd_intro.md
   - Lab Setup: lab_setup_connect.md
-  - Hands-On 1: hands_on_01.md
+  - Lab Guide:
+      - CI/CD Introduction: Lab_Guide/cicd_intro.md
+      - Hands-On 1: 
+          - Section A: Lab_Guide/hands_on_01_section_a.md
+          - Section B: Lab_Guide/hands_on_01_section_b.md
+          - Section C: Lab_Guide/hands_on_01_section_c.md          
+      - Hands-On 2:
+          - Section A: Lab_Guide/hands_on_02_section_a.md
+          - Section B: Lab_Guide/hands_on_02_section_b.md       
+                  
 
 markdown_extensions:
   - pymdownx.inlinehilite

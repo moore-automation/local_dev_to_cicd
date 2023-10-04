@@ -16,13 +16,13 @@
 ### Demo - 30 minutes
 
     -  Device 
-        -  Example on doing per hand
-        -  Example of doing using a tool
-    -  Gitlab 
-        -  Create project
-        -  Add files to project
-        -  Create CI file
-        -  Test commit
+        -  Example on doing per hand (cli, netmiko)
+        -  Example of doing using a tool (ansible, pyats)
+    -  Gitlab
+        -  Access Gitlab
+        -  Create basic Gitlab CI file
+        -  Inspect job details
+        -  Optional (Update description, execute against only development)
 
 ## Section 2: Dev vs Prod, Pipeline validation - 10 minutes
 
@@ -30,18 +30,19 @@
         -  Blocks : Validation, Dev deploy, testing, prod deploy
     -  Validation 
         -  Syntax/Linting
-        -  Unit/smoke
-        -  Functional/UAT
+        -  Functional
+        -  Compliance testing
 
 ### Project Examples - 30 minutes
 
     -  Device 
         -  Example using gitlab commit trigger
     -  Gitlab 
-        -  Update CI to include change to dev environment first
+        -  Update CI to include change to dev environment after linting.
     -  Validation 
         -  Add linter for validation
         -  PyATS check device state
+        -  Ensure Production execution only after succesful test.
 
 ### Closure/Summary - 10 minutes
 
