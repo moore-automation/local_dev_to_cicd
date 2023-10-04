@@ -20,7 +20,7 @@ RUN \
   mkdir -p /etc/ansible/ /ansible && \
   echo "[local]\nlocalhost ansible_connection=local" > /etc/ansible/hosts && \
   echo "===> Adding playbooks volume ..."  && \
-  pip3 install pyats pip3 && \
+  pip3 install pyats paramiko && \
   ansible-galaxy collection install cisco.ios
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
