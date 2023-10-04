@@ -54,14 +54,18 @@ Once you've started the containers you can access the  GUI at localhost:2080 or 
 
 The build process is more complicated than some you may have seen - it requires multiple entrypoint scripts and a wrapper to ensure the user and projects are created, as well as successfully registering the runner. As we wanted a single up process each container waits for the GitLab service to be fully up by iteratively checking the health using : ```curl $GITLAB_URL:80/-/health```.
 
-*Git Related Build Process*
-\
+As we're running a local deployment we've chosen to create a functional runner which includes all the bits pre-built - in most production installs you're more likely going to see a pipeline to built and host a local package for this purpose and as your use cases expand you'll likely be build specific packages for each tool. An example could be a scheduled Pipeline to update an Ansible image and a 'test' image using PyATS and Robot Framework.
+
+If you wish to make changes to the Gitlab repository while the container is running outside the GUI you can clone the repo using the above credentials at this URL:
+
+  ``` http://localhost:2443/default_user/Default_Resources.git ```
+
 ![Basic Diagram](assets/diagrams/orch_build.drawio.svg)
 \
-
+*Git Related Build Process*
 ### Devtools Container
 
-\
-*DevTools Build Process*
+This container is primarily used for Hands on 1 as a development space for netmiko, PyATS and Ansible, when we work with Gitlab we're going to use Gitlab and the Gitlab Runner instead for simplicity. The container is always up and mounts the contents of the 'content/*' during build. Any changes to the content folder will not be reflected in runtime and would require a rebuild or update to the named volume.
 
 ![Work Engines](assets/diagrams/we_build.drawio.svg)
+*DevTools Build Process*

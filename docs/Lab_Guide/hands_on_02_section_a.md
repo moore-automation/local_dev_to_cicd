@@ -1,157 +1,121 @@
-# All Hands on Deck
-Now, we will start to make our first changes to our config and build the foundation for our CI/CD pipline that we will create later.
+# Hands on 2: Linting & Stages
 
-## Manual Labour
-First, go ahead and make a manual change to the configuration of the interface that has been assigned to you.
+## Linting
 
-For this, you can connect to the **dev** Switch on 198.18.132.151 via SSH. 
-You will find yourself on the command line with the enabled prompt **`#`**
+As discussed in the main room - linting is a term used to describe tools which make sure we haven't made some serious *tyypos* in our code/configuration. Depending on the tool used there are additional useful features to ensure adherence to a paticular standard as an example most IDEs include PyFlakes which looks for syntactical errors and some recommendations based on agreed standards. You can enahnce this functionality with tools such as [Flake8](https://flake8.pycqa.org/en/latest/index.html#quickstart) which acts as a wrapper for specifications (in this case [PEP8](https://peps.python.org/pep-0008/) which aims to improve readability of code.
 
-Your first task is to go into the configuration mode and change the description of your assigned interface. Maybe you could mark it with your name?
+For some of us linting might sound like an optional step but in reality ensuring readability and simplicity is essentiall when adopting new technologies or approaches. So do it!! :)
 
-If you have trouble doing this on your own you can find the solution down below.
-<details>
+In this task we're going to incorporate a job to lint our Ansible folder to make sure we've no typos!
 
-<summary>Click here to show solution</summary>
-  
-  ```bash linenums="1" title="Manual Configuration Example"
-      Cat9kv-01#
+```yml
+yamllint:
+  stage: validate
+  image: registry.gitlab.com/pipeline-components/yamllint:latest
+  script:
+    - yamllint Ansible
+```
 
-      # Let's check the current interface config
+This is a pretty simple example where we're executing a single bash command, we used the `yamllint` image to build a container which linted our Ansible folder and returned success/failure. The exit code is important here as we'll be using it as a conditional step in a future task. To make things really clear i've documented them below:
 
-      Cat9kv-01#sh run | section interface
-      interface GigabitEthernet0/0
-        vrf forwarding Mgmt-vrf
-        ip dhcp client client-id GigabitEthernet0/0
-        ip address dhcp
-        negotiation auto
-      interface GigabitEthernet1/0/1
-      interface GigabitEthernet1/0/2
-      interface GigabitEthernet1/0/3
-      ...
+```yml
+Job name:                           yamllint:
+Stage name:                           stage: validate
+Image name:                           image: registry.gitlab.com/pipeline-components/yamllint:latest
+Action:                               script:
+CLI execution:                          - yamllint Ansible
+```
 
-      Cat9kv-01#
-      Cat9kv-01#conf t
-      Cat9kv-01(config)#interface GigabitEthernet 1/0/1 
-      Cat9kv-01(config-if)#description Configured manually by frewagne
-      Cat9kv-01(config-if)#end
+In production pipelines you should expect to see multiple lint stages depending on the specific tool/language used. In our demo example we could have used both `yamllint` and `ansible-lint` which contain different rule packages though we chose to use one for simplicity.
 
-      # Now check the config of the interfaces again
+### Task
 
-      Cat9kv-01#sh run | section interface
-      interface GigabitEthernet0/0
-        vrf forwarding Mgmt-vrf
-        ip dhcp client client-id GigabitEthernet0/0
-        ip address dhcp
-        negotiation auto
-      interface GigabitEthernet1/0/1
-        description Configured manually by frewagne
-      interface GigabitEthernet1/0/2
-      interface GigabitEthernet1/0/3
-      ...
-  ```
+The first step of this task is pretty simple:
+
+1. Copy the below into your gitlab ci file, commit the file.
+
+```yml
+yamllint:
+  image: registry.gitlab.com/pipeline-components/yamllint:latest
+  script:
+    - yamllint Ansible
+```
+
+2. Check to see what happened in the pipeline (CI/CD > Pipelines)
+3. Add some junk data to the top of the `interfaces_update.yml` file and hopefully the yamllint job failed.
+4. Remove your junk data and check to see success.
+
+That's it for now, but we'll be using the fail/success outcomes in future tasks.
+
+## Stages
+
+Stages are a relatively simple concept in that they contain multiple jobs and represent a logical phase in our workflow, common examples include build, validate, test, deploy etc.. They're useful for isolating functionality and can be used to restrict execution based on a previous phase (as we will see later.) A common use case is don't deploy unless all your tests and build phases have passed.
+
+If no stages are specified, a 'test' stage is implied; so that we can start segmenting our Pipeline we'll create two stages (validate, deploy) at the top of our ci file.
+
+```yml
+---
+stages:
+  - validate
+  - deploy
+```
+
+For both our jobs `yamllint` and `deploy_dev` you need to specify with which stage the job is associated as below:
+
+```yml
+yamllint:
+  ...
+  stage: validate
+  ...
+
+deploy_dev:
+  ...
+  stage: deploy
+  ...
+```
+
+Specific devices
+
+only
+
+
+
+
+
+<details><summary>Click here to show solution</summary>
+
+```yml linenums="1" title="Deploy to Development Final Example"
+deploy_dev:
+  stage: deploy
+  script:
+    - cd Ansible
+    - ansible-playbook -i inventory -e 'devices=development' playbooks/interface_update.yml
+  only:
+    - master
+```
 
 </details>
 
-## Loading your toolbelt
 
-Now, you might want to get you hands less dirty than using th CLI manually every time you make a change to one device. Or what do you do when you need to make changes to multiple devices?
-There are plenty of tools that can help you work with your devices and automate some simple workflows already.
-One example of this is [Netmiko](https://github.com/ktbyers/netmiko). 
 
-We will make a short example here on how to use Netmiko to configure our interface using a python script.
+## Conditional Phases
 
-For this, you will need Python installed on your machine, but you can also follow the demo in the session.
 
-To install netmiko, simply use pip:
 
-`$ pip install netmiko``
 
-We will use the following small python script:
-```python
-    from netmiko import ConnectHandler
 
-    cat_dev = {
-        'device_type': 'cisco_xe',
-        'host':   '198.18.132.151',
-        'username': 'admin',
-        'password': 'C1sco12345',
-    }
-    net_connect = ConnectHandler(**cat_dev)
-    # Execute Show Command
-    output = net_connect.send_command('show run | section interface')
-    print(output)
-    print("\n")
-    config_commands = [ 'interface GigabitEthernet 1/0/1',
-                        'description Configured with netmiko by frewagne'
-                    ]
-    # Use your assigned interface to configure!
-    output = net_connect.send_config_set(config_commands)
-    print(output)
-    print("\n")
-    output = net_connect.send_command('show run | section interface')
-    print(output)
+<details><summary>Click here to show solution</summary>
+
+```yml linenums="1" title="Deploy to Development Final Example"
+deploy_dev:
+  stage: deploy
+  script:
+    - cd Ansible
+    - ansible-playbook -i inventory -e 'devices=development' playbooks/interface_update.yml
+  needs: 
+    - yamllint
+  only:
+    - master
 ```
 
-Execute the python script using `python3 netmiko_interface_description.py`
-
-Once the script has been successfully executed, we can check the current interface config:
-```
-    Cat9kv-01#sh run | section interface
-    interface GigabitEthernet0/0
-      vrf forwarding Mgmt-vrf
-      ip dhcp client client-id GigabitEthernet0/0
-      ip address dhcp
-      negotiation auto
-    interface GigabitEthernet1/0/1
-      description Configured with netmiko by frewagne
-    interface GigabitEthernet1/0/2
-    interface GigabitEthernet1/0/3
-    ...
-```
-
-## All hands on GitLab
-From the root of the cloned repository, bring up the containers using docker compose as described in the Readme file of the repo:
-
-This project is extremely simple, it requires only docker to be installed on the host and this repository to be cloned or manually copied. *default today is compose version 2*
-
-**You might have to change the `EXT_IMG_VERSION_GITLAB` variable in the `.env` file in this repository, depending on what's your processors architecture!**
-
-1. To start the service simply run either of the following:
-   1. (Version 1) ```docker-compose up -d```
-   2. (Version 2+) ```docker compose up -d```
-2. Check containers are spinning up
-3. Go have a cup of tea for 5 minutes while gitlab get's ready.
-4. Access gitlab in your browser : http://localhost:2080
-5. Access devtools from cli : ```docker exec -it engine_devtools bash```
-
-Should look something like this:
-
-![docker_startup](assets/run.gif)
-
-Once all the containers are up and running, you  got yourself a great automation toolset and a GitLab instance of your own! All inclusive a GitLab runner that will take care of the execution of our pipeline later on.
-
-You can now access your GitLab instance under `localhost:2080` in your browser and log in with the specified credentials:
-- default_user
-- C1sco12345
-
-Once you successfully authenticated, you will see an existing project called `Default Resources` in which you will find a folder structure named `Ansible/playbooks` where we will store the files that will make up our device configuration.
-
-Now you have the foundation for the pipeline! In this project repository we will store our files and add a CI file which can be interpreted by GitLab and is the collection of stages and tasks that will make up our pipeline in the end.
-Next we will add our configuration template to our repository. Storing it centrally in the repo enables tracking of changes, collaborative work and rollback of commits if needed.
-After our playbook is stored, we will create the CI file called `.gitlab-ci.yml`. Here we will describe the procedure of our pipeline. We will start with a basic dummy skeleton.
-
-```
-stages:
-    - dummy
-
-dummy-job:
-    stage: dummy
-    script:
-        - echo "This pipeline is triggered successfully!"
-```
-
-#TODO
--	Add files to project
--	Create CI file
--	Test commit
+</details>

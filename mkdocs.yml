@@ -24,7 +24,7 @@ nav:
           - Section B: Lab_Guide/hands_on_01_section_b.md
           - Section C: Lab_Guide/hands_on_01_section_c.md          
       - Hands-On 2:
-          - Section A: Lab_Guide/hands_on_02_section_a.md
+          - Linting & Stages: Lab_Guide/hands_on_02_section_a.md
           - Section B: Lab_Guide/hands_on_02_section_b.md       
                   
 

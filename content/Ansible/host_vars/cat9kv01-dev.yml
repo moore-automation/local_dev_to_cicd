@@ -1,5 +1,5 @@
 ---
 interfaces:
   - name: GigabitEthernet1/0/1
-    description: I'm a dummy description
+    description: I'm an automated description
     enabled: true
