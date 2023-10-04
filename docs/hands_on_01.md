@@ -60,12 +60,8 @@ There are plenty of tools that can help you work with your devices and automate 
 One example of this is [Netmiko](https://github.com/ktbyers/netmiko). 
 
 We will make a short example here on how to use Netmiko to configure our interface using a python script.
-
 For this, you will need Python installed on your machine, but you can also follow the demo in the session.
-
-To install netmiko, simply use pip:
-
-`$ pip install netmiko``
+To install netmiko, simply use pip: `$ pip install netmiko`
 
 We will use the following small python script:
 ```python
@@ -93,7 +89,7 @@ We will use the following small python script:
     print(output)
 ```
 
-Execute the python script using `python3 netmiko_interface_description.py`
+Execute the python script using `$ python3 netmiko_interface_description.py`
 
 Once the script has been successfully executed, we can check the current interface config:
 ```
@@ -131,9 +127,7 @@ Should look something like this:
 
 Once all the containers are up and running, you  got yourself a great automation toolset and a GitLab instance of your own! All inclusive a GitLab runner that will take care of the execution of our pipeline later on.
 
-You can now access your GitLab instance under `localhost:2080` in your browser and log in with the specified credentials:
-- default_user
-- C1sco12345
+You can now access your GitLab instance under `localhost:2080` in your browser and log in with the specified credentials: `default_user/C1sco12345` 
 
 Once you successfully authenticated, you will see an existing project called `Default Resources` in which you will find a folder structure named `Ansible/playbooks` where we will store the files that will make up our device configuration.
 
