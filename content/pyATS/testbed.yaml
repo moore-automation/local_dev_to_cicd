@@ -1,0 +1,29 @@
+testbed:
+    name: pyATS_CICD_Hands_On
+devices:
+    Cat9kv-01:
+        type: 'switch'
+        os: 'iosxe'
+        platform: c9kv
+        alias: 'dev'
+        credentials:
+            default:
+                username: admin
+                password: C1sco12345
+        connections:
+            cli:
+                protocol: ssh
+                ip: "198.18.132.151"
+    Cat9kv-02:
+        type: 'switch'
+        os: 'iosxe'
+        platform: c9kv
+        alias: 'prod'
+        credentials:
+            default:
+                username: admin
+                password: C1sco12345
+        connections:
+            cli:
+                protocol: ssh
+                ip: "198.18.132.152"
