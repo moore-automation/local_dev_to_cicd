@@ -1,4 +1,4 @@
-switches:
+all:
   hosts:
     cat9kv01-dev:
         ansible_host: 198.18.132.151 
@@ -9,3 +9,11 @@ switches:
     ansible_network_os: cisco.ios.ios
     ansible_user: admin
     ansible_password: C1sco12345
+  children: 
+    production:
+        hosts:
+          cat9kv02-prod:
+    development:
+        hosts:
+          cat9kv01-dev:
+      

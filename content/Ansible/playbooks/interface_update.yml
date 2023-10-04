@@ -1,7 +1,7 @@
 ---
 
 - name: Cisco Interface Example
-  hosts: '{{ all | default("switches") }}'
+  hosts: '{{ devices | default("all") }}'
   gather_facts: false
 
   tasks:

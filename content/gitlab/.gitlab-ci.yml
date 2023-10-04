@@ -23,32 +23,31 @@ stages:
 # network_request app jobs
 ########################################################################################
 
-# Validate code format and syntax
-format-check:
-  stage: validate
-  image: python:3.9
-  script:
-    - pip install -e .
-    - pip install -e '.[test]'
-    - black --check network_request
-    - black --check tests
+
 
 yamllint:
-  stage: linting
+  stage: validate
   image: registry.gitlab.com/pipeline-components/yamllint:latest
   script:
-    - yamllint content/Ansible
+    - yamllint Ansible
 
 
-# Run the Python tests against the network_request application
-run_pytest:
-  stage: test
-  image: python:3.9
-
-
-config_update:
-  stage: deploy_dev
-  variables:
-    ANSIBLE_HOST_KEY_CHECKING: "False"
+deploy_dev:
+  stage: deploy
   script:
-    - ansible-playbook -i inventory -u root playbooks/interface_update.yml -vv
+    - cd Ansible
+    - ansible-playbook -i inventory -e 'devices=development' playbooks/interface_update.yml
+  needs: 
+    - yamllint
+  only:
+    - master
+
+deploy_prod:
+  stage: deploy
+  script:
+    - cd Ansible
+    - ansible-playbook -i inventory -e 'devices=production' playbooks/interface_update.yml
+  needs: 
+    - deploy_dev
+  only:
+    - master
