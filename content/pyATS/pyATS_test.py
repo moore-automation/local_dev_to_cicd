@@ -13,7 +13,7 @@ try:
     device = sys.argv[1]
     interface_no = sys.argv[2]
 except Exception as e:
-    print("Parsing of Interface Config failed! Did you specify the Interface Number (0-8)?")
+    print("Did you specify the Interface Number (0-8)?")
     print(e)
     sys.exit()
 
@@ -22,13 +22,14 @@ phrase = "I'm an automated description"
 dev = tb.devices[device]
 
 try:
+    print(f"Connecting to device {dev}, checking interface {interface}!")
     dev.connect(mit=True)
     p = dev.parse(f'show interfaces {interface}')
     description = p[f'{interface}']['description']
+    if(phrase not in description):
+        print("Not an automated description!")
+        sys.exit()
+    else:
+        print(f"Interface description test successful: {description}")
 except Exception as e:
     print(e)
-
-if(phrase not in description):
-    sys.exit()
-else:
-    print(f"Interface description test successful: {phrase}")

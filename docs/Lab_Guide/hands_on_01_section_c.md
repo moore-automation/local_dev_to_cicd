@@ -15,7 +15,7 @@ This project is extremely simple, it requires only docker to be installed on the
 
 Should look something like this:
 
-![docker_startup](assets/run.gif)
+![docker_startup](../assets/run.gif)
 
 Once all the containers are up and running, you  got yourself a great automation toolset and a GitLab instance of your own! All inclusive a GitLab runner that will take care of the execution of our pipeline later on.
 
