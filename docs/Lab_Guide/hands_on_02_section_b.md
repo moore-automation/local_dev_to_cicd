@@ -12,13 +12,14 @@ Similar to the previous linting phase we're going to add a job to execute our py
 
 In our lab we're using two switches `cat9kv01-dev` and `cat9kv02-prod` as symbolic representations of development and production - depending on scale you may create seperate stages for these groups; as we're demonstrating concepts we'll keep things simple. To ensure that any serious issues don't affect production, we're going to seperate the execution of the ansible playbook to first target only the development hosts, execute a test and based on the success of the test execute in production.
 
-1. Rename deploy_infra to deploy_dev and update the environment variable within the ansible-playbook command to run only on dev devices (check Ansible Inventory file in case you get stuck)
+1. Replace the deploy stage with two covering `development` and `production.` 
+2. Rename deploy_infra to deploy_dev, assigned to correct stage and update the environment variable within the ansible-playbook command to run only on dev devices (check Ansible Inventory file in case you get stuck)
 
 <details><summary>Click here to show solution</summary>
 
 ```yml linenums="1"
 deploy_dev:
-  stage: deploy
+  stage: development
   script:
     - cd Ansible
     - ansible-playbook -i inventory -e 'devices=development' playbooks/interface_update.yml
@@ -31,14 +32,14 @@ deploy_dev:
 
 </details>
 
-2. Create a production job called `deploy_prod` which targets only production devices.
+3. Create a production job called `deploy_prod` assigned to correct stage, which targets only production devices.
 
 <details><summary>Click here to show solution</summary>
 
 ```yml linenums="1"
 
 deploy_prod:
-  stage: deploy
+  stage: production
   script:
     - cd Ansible
     - ansible-playbook -i inventory -e 'devices=production' playbooks/interface_update.yml
@@ -64,7 +65,7 @@ You should be a whizz at creating jobs in ci files by now so we've included them
 ```yml linenums="1" title="pyATS example"
 
 test_XXX:
-  stage: test
+  stage: XXX
   script:
     - cd pyATS
     - 'Insert pyATS commands'

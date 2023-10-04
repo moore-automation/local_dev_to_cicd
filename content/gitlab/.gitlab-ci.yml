@@ -3,8 +3,8 @@
 
 stages:
   - validate
-  - test
-  - deploy
+  - development
+  - production
 
 ########################################################################################
 # Simple workflow to demonstrate test and deploy
@@ -20,7 +20,7 @@ yamllint:
 
 
 deploy_dev:
-  stage: deploy
+  stage: development
   script:
     - cd Ansible
     - ansible-playbook -i inventory -e 'devices=development' playbooks/interface_update.yml
@@ -30,7 +30,7 @@ deploy_dev:
     - master
 
 test_dev:
-  stage: test
+  stage: development
   script:
     - cd pyATS
     - python3 pyATS_test.py dev 1
@@ -40,21 +40,21 @@ test_dev:
     - master
 
 deploy_prod:
-  stage: deploy
+  stage: production
   script:
     - cd Ansible
     - ansible-playbook -i inventory -e 'devices=production' playbooks/interface_update.yml
   needs: 
-    - test_infra
+    - test_dev
   only:
     - master
 
 test_prod:
-  stage: test
+  stage: production
   script:
     - cd pyATS
     - python3 pyATS_test.py prod 1
   needs: 
-    - deploy_dev
+    - deploy_prod
   only:
     - master
