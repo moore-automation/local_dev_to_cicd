@@ -1,5 +1,5 @@
 ---
 interfaces:
   - name: GigabitEthernet1/0/1
-    description: Configured and Replaced by Ansible
+    description: I'm a dummy description
     enabled: true

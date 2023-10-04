@@ -1,13 +1,6 @@
 ########################################################################################
 # To do
-#  Add stage for development and production
-# get a sample ansible playbook working
 # get a dummy pyats working 
-# Create before and after playbooks
-# Update for ci to work 
-# First task assumed to run within devtools
-# Second to run within gitlab.ci 
-
 
 ########################################################################################
 
@@ -20,7 +13,7 @@ stages:
   - deploy
 
 ########################################################################################
-# network_request app jobs
+# Simple workflow to demonstrate test and deploy
 ########################################################################################
 
 
@@ -41,6 +34,8 @@ deploy_dev:
     - yamllint
   only:
     - master
+
+
 
 deploy_prod:
   stage: deploy
