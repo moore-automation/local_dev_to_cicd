@@ -1,9 +1,3 @@
-########################################################################################
-# To do
-# get a dummy pyats working 
-
-########################################################################################
-
 
 ---
 
@@ -35,11 +29,11 @@ deploy_dev:
   only:
     - main
 
-test_infra:
-  stage: testing
+test_dev:
+  stage: test
   script:
     - cd pyATS
-    - echo 'Insert pyATS commands'
+    - python3 pyATS_test.py dev 1
   needs: 
     - deploy_dev
   only:
@@ -52,5 +46,15 @@ deploy_prod:
     - ansible-playbook -i inventory -e 'devices=production' playbooks/interface_update.yml
   needs: 
     - test_infra
+  only:
+    - main
+
+test_prod:
+  stage: test
+  script:
+    - cd pyATS
+    - python3 pyATS_test.py prod 1
+  needs: 
+    - deploy_dev
   only:
     - main

@@ -7,23 +7,6 @@ Like L3 Routing this topic is also a monster but feel free to speak with your pr
 
 Similar to the previous linting phase we're going to add a job to execute our pyATS test from Section 1 - again in practice you're going to see many different types of testing in your pipelines.
 
-## Task - Adding a test job
-
-You should be a whizz at creating jobs in ci files by now so we've included them below, when you choose to edit the `.gitlab-ci.yml` file you are given an option to edit in 'Pipeline Editor' which allows you to visualize the change. Experiment with these features to make sure your change creates the new stage and job.
-
-* NOTE: update your interface to the one which your proctor provides for Section 2 *
-
-```yml linenums="1" title="pyATS example"
-
-test_infra:
-  stage: testing
-  script:
-    - cd pyATS
-    - echo 'Insert pyATS commands'
-  needs:
-    - deploy_infra
-
-```
 
 ## Specific devices
 
@@ -65,54 +48,34 @@ deploy_prod:
     - main    
 ```
 
-3. Update deploy_prod so that it depends on the execution of the pyATS test.
+</details>
 
-<details><summary>Click here to show solution</summary>
+## Task - Adding a test job
 
-```yml linenums="1" title="Deploy to Development Final Example"
+You should be a whizz at creating jobs in ci files by now so we've included them below, when you choose to edit the `.gitlab-ci.yml` file you are given an option to edit in 'Pipeline Editor' which allows you to visualize the change. 
 
-deploy_prod:
-  stage: deploy
+1. Add a stage for test.
+2. Create two jobs `test_dev` and `test_prod` , update the pyATS command as appropriate.
+3. Update `needs:` on both deploy jobs as appropriate to ensure tests follow deploy actions and production deploy doesn't execute until test_dev has completed.
+4. Experiment with these features to make sure your change creates the new stage and job.
+
+* pyATS synax : `python3 pyATS_test.py dev 1 ` = development switch, interface 1.
+
+```yml linenums="1" title="pyATS example"
+
+test_XXX:
+  stage: test
   script:
-    - cd Ansible
-    - ansible-playbook -i inventory -e 'devices=production' playbooks/interface_update.yml
-  needs: 
-    - test_infra
-  only:
-    - main    
+    - cd pyATS
+    - 'Insert pyATS commands'
+  needs:
+    - XXXX
+
 ```
 
-</details>
+**NOTE:** update your interface to the one which your proctor provides for Section 2 *
 
-</details>
-
-
-<details><summary>Click here to show solution</summary>
-
-```yml linenums="1" title="Deploy to Development Final Example"
-deploy_dev:
-  stage: deploy
-  script:
-    - cd Ansible
-    - ansible-playbook -i inventory -e 'devices=development' playbooks/interface_update.yml
-  needs: 
-    - yamllint
-  only:
-    - main
-
-deploy_prod:
-  stage: deploy
-  script:
-    - cd Ansible
-    - ansible-playbook -i inventory -e 'devices=production' playbooks/interface_update.yml
-  needs: 
-    - yamllint
-  only:
-    - main    
-```
-
-</details>
-
+The complete CI file can be found here: [Complete CI File](https://github.com/moore-automation/local_dev_to_cicd/blob/main/content/gitlab/.gitlab-ci.yml)
 
 ## Gold Star Exercises
 
