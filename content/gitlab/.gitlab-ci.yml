@@ -1,0 +1,48 @@
+########################################################################################
+# To do
+# get a dummy pyats working 
+
+########################################################################################
+
+
+---
+
+stages:
+  - validate
+  - test
+  - deploy
+
+########################################################################################
+# Simple workflow to demonstrate test and deploy
+########################################################################################
+
+
+
+yamllint:
+  stage: validate
+  image: registry.gitlab.com/pipeline-components/yamllint:latest
+  script:
+    - yamllint Ansible
+
+
+deploy_dev:
+  stage: deploy
+  script:
+    - cd Ansible
+    - ansible-playbook -i inventory -e 'devices=development' playbooks/interface_update.yml
+  needs: 
+    - yamllint
+  only:
+    - master
+
+
+
+deploy_prod:
+  stage: deploy
+  script:
+    - cd Ansible
+    - ansible-playbook -i inventory -e 'devices=production' playbooks/interface_update.yml
+  needs: 
+    - deploy_dev
+  only:
+    - master

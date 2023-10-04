@@ -1,0 +1,13 @@
+---
+
+stages:
+
+  - deploy
+
+deploy_prod:
+  stage: deploy
+  script:
+    - cd Ansible
+    - ansible-playbook -i inventory -e 'devices=all' playbooks/interface_update.yml
+  only:
+    - master
