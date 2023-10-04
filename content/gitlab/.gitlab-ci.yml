@@ -33,13 +33,12 @@ format-check:
     - black --check network_request
     - black --check tests
 
-lint:
-  stage: validate
-  image: python:3.9
+yamllint:
+  stage: linting
+  image: registry.gitlab.com/pipeline-components/yamllint:latest
   script:
-    - pip install -e .
-    - pip install -e '.[test]'
-    - flake8 network_request
+    - yamllint content/Ansible
+
 
 # Run the Python tests against the network_request application
 run_pytest:

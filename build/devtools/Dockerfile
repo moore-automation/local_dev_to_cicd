@@ -27,12 +27,12 @@ RUN \
   mkdir /etc/ansible/ /ansible && \
   echo "[local]\nlocalhost ansible_connection=local" > /etc/ansible/hosts && \
   echo "===> Adding playbooks volume ..."  && \
-  mkdir -p /ansible && \
-  pip3 install pyats
+  mkdir -p /content && \
+  pip3 install pyats paramiko
 
-WORKDIR /ansible/interface_update
-
-COPY /content/Ansible .
-VOLUME /ansible/interface_update 
+WORKDIR /content
+COPY /content/ .
+VOLUME /content 
+EXPOSE 22
 
 ENTRYPOINT ["tail", "-f", "/dev/null"]

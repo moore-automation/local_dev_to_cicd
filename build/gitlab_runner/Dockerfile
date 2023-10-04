@@ -5,11 +5,21 @@ FROM gitlab/$RUNNER_VERSION:$TAG
 COPY /build/gitlab_runner/docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
 RUN \
-  echo "===> Update and curl Install..."  && \
+  echo "===> Update and Install packages..."  && \
   apt-get update && apt-get -y install --no-install-recommends\
   apt-transport-https \
   ca-certificates \
   curl \
-  bash
+  bash \
+  ansible \
+  gcc \
+  python3-dev \
+  python3-pip && \
+  rm -rf /var/lib/apt/lists/* && \
+  echo "===> Adding localhost ..."  && \
+  mkdir -p /etc/ansible/ /ansible && \
+  echo "[local]\nlocalhost ansible_connection=local" > /etc/ansible/hosts && \
+  echo "===> Adding playbooks volume ..."  && \
+  pip3 install pyats pip3
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
