@@ -16,12 +16,17 @@ In each Pod an Ubuntu VM is present to host automation components.
 ## Adressing and Access
 
 Catalyst VM "dev":
+
 - IP: 198.18.132.151
 - admin/C1sco12345
+
 Catalyst VM "prod":
+
 - IP: 198.18.132.152
 - admin/C1sco12345
+
 Ubuntu VM:
+
 - IP: 198.18.133.101
 - root/C1sco12345
 - Can be accessed via RDP if needed

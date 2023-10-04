@@ -28,7 +28,7 @@ CLI execution:                          - yamllint Ansible
 
 In production pipelines you should expect to see multiple lint stages depending on the specific tool/language used. In our demo example we could have used both `yamllint` and `ansible-lint` which contain different rule packages though we chose to use one for simplicity.
 
-### Task
+### Task - Add lint job
 
 The first step of this task is pretty simple:
 
@@ -60,7 +60,7 @@ stages:
   - deploy
 ```
 
-For both our jobs `yamllint` and `deploy_dev` you need to specify with which stage the job is associated as below:
+For both our jobs `yamllint` and `deploy_infra` you need to specify with which stage the job is associated as below:
 
 ```yml
 yamllint:
@@ -68,54 +68,67 @@ yamllint:
   stage: validate
   ...
 
-deploy_dev:
+deploy_infra:
   ...
   stage: deploy
   ...
 ```
 
-Specific devices
+### Task - Add Stages
 
-only
-
-
-
-
-
-<details><summary>Click here to show solution</summary>
-
-```yml linenums="1" title="Deploy to Development Final Example"
-deploy_dev:
-  stage: deploy
-  script:
-    - cd Ansible
-    - ansible-playbook -i inventory -e 'devices=development' playbooks/interface_update.yml
-  only:
-    - master
-```
-
-</details>
-
-
+1. Update your ci file with stages as above
+2. Inspect the Pipeline to see seperation of jobs.
 
 ## Conditional Phases
 
+There are many ways to create logic between jobs within Gitlab CI/CD, the simplest uses the `needs:` parameter to specify that the execution of a job relies on the succesful execution of a previous job. In our case we want to ensure that the deploy_infra job doens't execute until the lint job has succesfully completed.
 
+### Task - Conditional Execution
 
-
+1. Specify that deploy_infra requires yamllint to execute before it can begin.
 
 <details><summary>Click here to show solution</summary>
 
-```yml linenums="1" title="Deploy to Development Final Example"
-deploy_dev:
+```yml linenums="1" title="Conditional Execution"
+deploy_infra:
   stage: deploy
   script:
     - cd Ansible
-    - ansible-playbook -i inventory -e 'devices=development' playbooks/interface_update.yml
+    - ansible-playbook -i inventory -e 'devices=all' playbooks/interface_update.yml
   needs: 
-    - yamllint
-  only:
-    - master
+    - yamllint    
 ```
 
 </details>
+
+## Branch Specific Policies
+
+As a project expands it in nearly all cases becomes necessary to create branches when working across diverse teams or nfrastructure - making changes directly to main is in fact considered bad practice as it inceases complexity when resolving `merge conflicts` and approving `pull requests.` Typically we would recommend creating function specific branches to avoid these issues. 
+
+In most production instances would will see increased restrictions around branches that are permitted to make changes to 'protected' resources - a simple example is that you can only make changes to production from the main or 'prod' branch, and you can only push changes to that branch after review from your peers.
+
+In our example we're going to use the `only:` parameter to ensure that only changes from main can execute this job.
+
+### Task - Branch policy
+
+1. Similar to the needs parameter, update deploy_infra to only execute from the main branch.
+
+<details><summary>Click here to show solution</summary>
+
+```yml linenums="1" title="Conditional Execution"
+deploy_infra:
+  stage: deploy
+  script:
+    - cd Ansible
+    - ansible-playbook -i inventory -e 'devices=all' playbooks/interface_update.yml
+  needs: 
+    - yamllint    
+  only:
+    - main
+```
+
+</details>
+
+## Conclusion
+
+Great job for getting this far, I hope you'll takeawy the idea that testing the quality of our changes in advance is a good thing and adding enhancements like linting and conditional changes is a simple process with great rewards! Please move on to the next section in the navigation bar on the left.

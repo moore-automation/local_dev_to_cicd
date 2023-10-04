@@ -5,17 +5,17 @@
 
     -  Typical Use Cases/Personas
     -  Lab Topology - basic setup/connectivity
-    -  CICD 
+
         -  Why we need it
         -  What it does and how it helps
-    -  IaC 
+    -  IaC
         -  CLI Migration - CLI to tools/processes and job retention
         -  Config formats - specific syntax to generic data and templates
         -  Standardised processes - governance, triggers
 
 ### Demo - 30 minutes
 
-    -  Device 
+    -  Device
         -  Example on doing per hand (cli, netmiko)
         -  Example of doing using a tool (ansible, pyats)
     -  Gitlab
@@ -26,20 +26,20 @@
 
 ## Section 2: Dev vs Prod, Pipeline validation - 10 minutes
 
-    -  ‘Advanced’ Pipeline Stages 
+    -  ‘Advanced’ Pipeline Stages
         -  Blocks : Validation, Dev deploy, testing, prod deploy
-    -  Validation 
+    -  Validation
         -  Syntax/Linting
         -  Functional
         -  Compliance testing
 
 ### Project Examples - 30 minutes
 
-    -  Device 
+    -  Device
         -  Example using gitlab commit trigger
-    -  Gitlab 
+    -  Gitlab
         -  Update CI to include change to dev environment after linting.
-    -  Validation 
+    -  Validation
         -  Add linter for validation
         -  PyATS check device state
         -  Ensure Production execution only after succesful test.

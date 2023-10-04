@@ -33,7 +33,7 @@ deploy_dev:
   needs: 
     - yamllint
   only:
-    - master
+    - main
 
 test_infra:
   stage: testing
@@ -43,7 +43,7 @@ test_infra:
   needs: 
     - deploy_dev
   only:
-    - master
+    - main
 
 deploy_prod:
   stage: deploy
@@ -53,4 +53,4 @@ deploy_prod:
   needs: 
     - test_infra
   only:
-    - master
+    - main
