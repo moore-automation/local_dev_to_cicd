@@ -19,11 +19,11 @@ nav:
   - Lab Setup: lab_setup_connect.md
   - Lab Guide:
       - CI/CD Introduction: Lab_Guide/cicd_intro.md
-      - Hands-On 1: 
-          - Section A: Lab_Guide/hands_on_01_section_a.md
-          - Section B: Lab_Guide/hands_on_01_section_b.md
-          - Section C: Lab_Guide/hands_on_01_section_c.md          
-      - Hands-On 2:
+      - Hands-On Part 1: 
+          - Manual Work: Lab_Guide/hands_on_01_section_a.md
+          - Tooling: Lab_Guide/hands_on_01_section_b.md
+          - GitLab: Lab_Guide/hands_on_01_section_c.md          
+      - Hands-On Part 2:
           - Linting & Stages: Lab_Guide/hands_on_02_section_a.md
           - Dev/Prod & Testing: Lab_Guide/hands_on_02_section_b.md       
                   
