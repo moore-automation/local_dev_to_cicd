@@ -1,23 +1,6 @@
 ## All hands on GitLab
-From the root of the cloned repository, bring up the containers using docker compose as described in the Readme file of the repo:
 
-This project is extremely simple, it requires only docker to be installed on the host and this repository to be cloned or manually copied. *default today is compose version 2*
-
-**You might have to change the `EXT_IMG_VERSION_GITLAB` variable in the `.env` file in this repository, depending on what's your processors architecture!**
-
-1. To start the service simply run either of the following:
-   1. (Version 1) ```docker-compose up -d```
-   2. (Version 2+) ```docker compose up -d```
-2. Check containers are spinning up
-3. Go have a cup of tea for 5 minutes while gitlab get's ready.
-4. Access gitlab in your browser : http://localhost:2080
-5. Access devtools from cli : ```docker exec -it engine_devtools bash```
-
-Should look something like this:
-
-![docker_startup](../assets/run.gif)
-
-Once all the containers are up and running, you  got yourself a great automation toolset and a GitLab instance of your own! All inclusive a GitLab runner that will take care of the execution of our pipeline later on.
+To get started with GitLab, we will make use of all of the containers that you spun up previously.
 
 You can now access your GitLab instance under `localhost:2080` in your browser and log in with the specified credentials: `default_user/C1sco12345` 
 
@@ -36,3 +19,19 @@ dummy-job:
     script:
         - echo "This pipeline is triggered successfully!"
 ```
+
+You will now start to write you own CI file to configure the switches using Ansible in you devtools.
+
+<details>
+
+<summary>Click here to show solution</summary>
+  
+  ```bash linenums="1" title="Ansible Pipeline example"
+    ---
+    deploy_infra:
+    script:
+        - cd Ansible
+        - ansible-playbook -i inventory -e 'devices=all' playbooks/interface_update.yml
+  ```
+
+</details>
