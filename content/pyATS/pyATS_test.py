@@ -17,7 +17,7 @@ except Exception as e:
     print(e)
     sys.exit()
 
-interface = f"GigabitEthernet 1/0/{interface_no}"
+interface = f"GigabitEthernet1/0/{interface_no}"
 phrase = "I'm an automated description"
 dev = tb.devices[device]
 
