@@ -17,12 +17,12 @@ In each Pod an Ubuntu VM is present to host automation components.
 
 Catalyst VM "dev":
 
-- IP: 198.18.132.151
+- IP: 198.18.138.11
 - admin/C1sco12345
 
 Catalyst VM "prod":
 
-- IP: 198.18.132.152
+- IP: 198.18.138.12
 - admin/C1sco12345
 
 Ubuntu VM:
@@ -33,7 +33,7 @@ Ubuntu VM:
 
 Once you are connected to the VPN and after you installed the required tooling, you can try to access one of the Catalyst VMs via SSH like this:
 
-`ssh admin@198.18.132.151`
+`ssh admin@198.18.138.11`
 
 Enter the password which will take you to the follwoing prompt:
 

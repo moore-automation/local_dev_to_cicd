@@ -2,7 +2,7 @@ from netmiko import ConnectHandler
 
 cat_dev = {
     'device_type': 'cisco_xe',
-    'host':   '198.18.132.151',
+    'host':   '198.18.138.11',
     'username': 'admin',
     'password': 'C1sco12345',
 }

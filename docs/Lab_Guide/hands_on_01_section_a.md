@@ -4,7 +4,7 @@ Now, we will start to make our first changes to our config and build the foundat
 ## Manual Labour
 First, go ahead and make a manual change to the configuration of the interface that has been assigned to you.
 
-For this, you can connect to the **dev** Switch on 198.18.132.151 via SSH. 
+For this, you can connect to the **dev** Switch on 198.18.138.11 via SSH. 
 You will find yourself on the command line with the enabled prompt **`#`**
 
 Your first task is to go into the configuration mode and change the description of your assigned interface. Maybe you could mark it with your name?
