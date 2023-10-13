@@ -13,7 +13,7 @@ One device represents the development environment where configuration will be de
 In each Pod an Ubuntu VM is present to host automation components.
 
 
-## Adressing and Access
+## Addressing and Access
 
 Catalyst VM "dev":
 
@@ -35,7 +35,7 @@ Once you are connected to the VPN and after you installed the required tooling, 
 
 `ssh admin@198.18.138.11`
 
-Enter the password which will take you to the follwoing prompt:
+Enter the password which will take you to the following prompt:
 
 `Cat9kv-01#`
 

@@ -2,9 +2,9 @@
 
 ## Linting
 
-As discussed in the main room - linting is a term used to describe tools which make sure we haven't made some serious *tyypos* in our code/configuration. Depending on the tool used there are additional useful features to ensure adherence to a paticular standard as an example most IDEs include PyFlakes which looks for syntactical errors and some recommendations based on agreed standards. You can enahnce this functionality with tools such as [Flake8](https://flake8.pycqa.org/en/latest/index.html#quickstart) which acts as a wrapper for specifications (in this case [PEP8](https://peps.python.org/pep-0008/) which aims to improve readability of code.
+As discussed in the main room - linting is a term used to describe tools which make sure we haven't made some serious *tyypos* in our code/configuration. Depending on the tool used there are additional useful features to ensure adherence to a particular standard as an example most IDEs include PyFlakes which looks for syntactical errors and some recommendations based on agreed standards. You can enhance this functionality with tools such as [Flake8](https://flake8.pycqa.org/en/latest/index.html#quickstart) which acts as a wrapper for specifications (in this case [PEP8](https://peps.python.org/pep-0008/) which aims to improve readability of code.
 
-For some of us linting might sound like an optional step but in reality ensuring readability and simplicity is essentiall when adopting new technologies or approaches. So do it!! :)
+For some of us linting might sound like an optional step but in reality ensuring readability and simplicity is essentially when adopting new technologies or approaches. So do it!! :)
 
 In this task we're going to incorporate a job to lint our Ansible folder to make sure we've no typos!
 
@@ -77,11 +77,11 @@ deploy_infra:
 ### Task - Add Stages
 
 1. Update your ci file with stages as above
-2. Inspect the Pipeline to see seperation of jobs.
+2. Inspect the Pipeline to see separation of jobs.
 
 ## Conditional Phases
 
-There are many ways to create logic between jobs within Gitlab CI/CD, the simplest uses the `needs:` parameter to specify that the execution of a job relies on the succesful execution of a previous job. In our case we want to ensure that the deploy_infra job doens't execute until the lint job has succesfully completed.
+There are many ways to create logic between jobs within Gitlab CI/CD, the simplest uses the `needs:` parameter to specify that the execution of a job relies on the successful execution of a previous job. In our case we want to ensure that the deploy_infra job doesn't execute until the lint job has successfully completed.
 
 ### Task - Conditional Execution
 
@@ -103,7 +103,7 @@ deploy_infra:
 
 ## Branch Specific Policies
 
-As a project expands it in nearly all cases becomes necessary to create branches when working across diverse teams or nfrastructure - making changes directly to master is in fact considered bad practice as it inceases complexity when resolving `merge conflicts` and approving `pull requests.` Typically we would recommend creating function specific branches to avoid these issues. 
+As a project expands it in nearly all cases becomes necessary to create branches when working across diverse teams or infrastructure - making changes directly to master is in fact considered bad practice as it increases complexity when resolving `merge conflicts` and approving `pull requests.` Typically we would recommend creating function specific branches to avoid these issues.
 
 In most production instances would will see increased restrictions around branches that are permitted to make changes to 'protected' resources - a simple example is that you can only make changes to production from the master or 'prod' branch, and you can only push changes to that branch after review from your peers.
 
@@ -112,8 +112,6 @@ In our example we're going to use the `only:` parameter to ensure that only chan
 ### Task - Branch policy
 
 1. Similar to the needs parameter, update deploy_infra to only execute from the master branch.
-
-
 
 <details><summary>Click here to show solution</summary>
 
@@ -133,4 +131,4 @@ deploy_infra:
 
 ## Conclusion
 
-Great job for getting this far, I hope you'll takeawy the idea that testing the quality of our changes in advance is a good thing and adding enhancements like linting and conditional changes is a simple process with great rewards! Please move on to the next section in the navigation bar on the left.
+Great job for getting this far, I hope you'll takeaway the idea that testing the quality of our changes in advance is a good thing and adding enhancements like linting and conditional changes is a simple process with great rewards! Please move on to the next section in the navigation bar on the left.

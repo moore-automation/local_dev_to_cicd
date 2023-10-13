@@ -4,15 +4,15 @@ Don't worry - you are not expecting to come up with a project from the ground up
 
 For this first small project, we will take network device configuration as an example of version-controlled files that will be applied to the devices in our environment through our pipeline later.
 
-*Note: In case you're reading this from the future - this repository was created for the purpose of a Partner Interactive Workshop, you can use the code as you like (subject to license) though the lab/topology sections will be redundant. There is some further documentation on how the containers are used below. *
+* Note: In case you're reading this from the future - this repository was created for the purpose of a Partner Interactive Workshop, you can use the code as you like (subject to license) though the lab/topology sections will be redundant. There is some further documentation on how the containers are used below. *
 
 ## Prerequisites
 
 To follow this Workshop, you should have these things:
 
-- Docker (covered in previous Hands-On session)
-- GitLab Account to save the project in a repo
-- VPN Client for connection to dCloud (AnyConnect)
+* Docker (covered in previous Hands-On session)
+* GitLab Account to save the project in a repo
+* VPN Client for connection to dCloud (AnyConnect)
 
 ## The Project
 
@@ -28,9 +28,9 @@ With all these previous building blocks, you will bring everything together: Fro
 
 The below topology details the dCloud instance we'll used as part of this lab:
 
-- Access: Provided via an AnyConnect VPN and will be provided by your breakout proctor.
-- Ubuntu VM: Hosts the Automation components.
-- Catalyst VM: There are two Cat9K instances which will represent a development and production switch.
+* Access: Provided via an AnyConnect VPN and will be provided by your breakout proctor.
+* Ubuntu VM: Hosts the Automation components.
+*Catalyst VM: There are two Cat9K instances which will represent a development and production switch.
 
 ![Topology](assets/topology.png)
 
@@ -38,8 +38,8 @@ The below topology details the dCloud instance we'll used as part of this lab:
 
 For reference we have included a visual workflow of the build process - when you enter ``` docker compose up -d ``` the referenced images are searched locally, if they aren't present, they are built based on what is documented in the compose and associated DOCKERFILE.
 
-- If you are attending our lab session, this repository will be present on the ubuntu VM documented above.
-- If you are looking to enhance or extend this repository you can add additional components in a similar way as documented in the workflows below.
+* If you are attending our lab session, this repository will be present on the ubuntu VM documented above.
+* If you are looking to enhance or extend this repository you can add additional components in a similar way as documented in the workflows below.
 
 We have chosen to ignore docker to build this lab and just install directly to the VM though it's important when you're designing your own stack that you understand how to interact with containers and more importantly why creating a modular system is useful when developing and separating environments. [Why Containers - Cisco](https://www.cisco.com/c/en/us/solutions/cloud/what-are-containers.html#~why-containers)
 
@@ -47,8 +47,8 @@ We have chosen to ignore docker to build this lab and just install directly to t
 
 To get started with Gitlab we have included a single GitLab instance and a runner (used to execute CI tasks.) A default_user and project are created automatically.
 
-- User: default_user
-- Password: C1sco12345
+* User: default_user
+* Password: C1sco12345
 
 Once you've started the containers you can access the  GUI at localhost:2080 or by clicking [here](http://localhost:2080).
 
@@ -63,9 +63,11 @@ If you wish to make changes to the Gitlab repository while the container is runn
 ![Basic Diagram](assets/diagrams/orch_build.drawio.svg)
 \
 *Git Related Build Process*
+
 ### Devtools Container
 
 This container is primarily used for Hands on 1 as a development space for netmiko, PyATS and Ansible, when we work with Gitlab we're going to use Gitlab and the Gitlab Runner instead for simplicity. The container is always up and mounts the contents of the 'content/*' during build. Any changes to the content folder will not be reflected in runtime and would require a rebuild or update to the named volume.
 
 ![Work Engines](assets/diagrams/we_build.drawio.svg)
+
 *DevTools Build Process*

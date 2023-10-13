@@ -4,6 +4,7 @@ Now, you might want to get you hands less dirty than using th CLI manually every
 There are plenty of tools that can help you work with your devices and automate some simple workflows already.
 
 ## Install Tools
+
 We have prepared a set of tools that you can use by cloning the repository and starting you own environment in docker using compose.
 
 This project is extremely simple, it requires only docker to be installed on the host and this repository to be cloned or manually copied. *default today is compose version 2*
@@ -26,7 +27,7 @@ Once all the containers are up and running, you  got yourself a great automation
 
 ## Netmiko
 
-One example of the tools that can be used is [Netmiko](https://github.com/ktbyers/netmiko). 
+One example of the tools that can be used is [Netmiko](https://github.com/ktbyers/netmiko).
 
 We will make a short example here on how to use Netmiko to configure our interface using a python script.
 For this, you can use the devtools provided to you. After you accessed the devtools from cli like shown in step 5 above, you are ready to go.
@@ -34,6 +35,7 @@ For this, you can use the devtools provided to you. After you accessed the devto
 If you want to do it locally, will you need to have Python installed and to install netmiko, simply use pip: `$ pip install netmiko`
 
 We will use the following small python script, which is also located on the devtools container:
+
 ```python
     from netmiko import ConnectHandler
 
@@ -62,6 +64,7 @@ We will use the following small python script, which is also located on the devt
 Execute the python script using `$ python3 netmiko_interface_description.py`
 
 Once the script has been successfully executed, we can check the current interface config:
+
 ```
     Cat9kv-01#sh run | section interface
     interface GigabitEthernet0/0

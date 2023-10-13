@@ -1,4 +1,4 @@
-## All hands on GitLab
+# All hands on GitLab
 
 To get started with GitLab, we will make use of all of the containers that you spun up previously.
 
@@ -10,7 +10,7 @@ Now you have the foundation for the pipeline! In this project repository we will
 Next we will add our configuration template to our repository. Storing it centrally in the repo enables tracking of changes, collaborative work and rollback of commits if needed.
 After our playbook is stored, we will create the CI file called `.gitlab-ci.yml`. Here we will describe the procedure of our pipeline. We will start with a basic dummy skeleton.
 
-```
+```yml
 stages:
     - dummy
 
