@@ -13,7 +13,7 @@ devices:
         connections:
             cli:
                 protocol: ssh
-                ip: "198.18.132.151"
+                ip: "98.18.138.11"
     Cat9kv-02:
         type: 'switch'
         os: 'iosxe'
@@ -26,4 +26,4 @@ devices:
         connections:
             cli:
                 protocol: ssh
-                ip: "198.18.132.152"
+                ip: "98.18.138.12"
