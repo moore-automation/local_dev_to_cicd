@@ -1,4 +1,5 @@
-from pyats.topology.loader import load
+#from pyats.topology.loader import load
+from genie.testbed import load
 import sys
 
 # This script takes two arguments
@@ -25,6 +26,7 @@ try:
     print(f"Connecting to device {dev}, checking interface {interface}!")
     dev.connect(mit=True)
     p = dev.parse(f'show interfaces {interface}')
+    dev.disconnect()
     description = p[f'{interface}']['description']
     if(phrase not in description):
         print("Not an automated description!")

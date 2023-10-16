@@ -28,7 +28,7 @@ RUN \
   echo "[local]\nlocalhost ansible_connection=local" > /etc/ansible/hosts && \
   echo "===> Adding playbooks volume ..."  && \
   mkdir -p /content && \
-  pip3 install pyats netmiko paramiko && \
+  pip3 install pyats[full] netmiko paramiko && \
   ansible-galaxy collection install cisco.ios
 
 WORKDIR /content
