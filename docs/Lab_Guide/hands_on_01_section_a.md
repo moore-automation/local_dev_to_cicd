@@ -9,7 +9,7 @@ First, go ahead and make a manual change to the configuration of the interface t
 For this, you can connect to the **dev** Switch on 198.18.138.11 via SSH.
 You will find yourself on the command line with the enabled prompt **`#`**
 
-Your first task is to go into the configuration mode and change the description of your assigned interface. Maybe you could mark it with your name?
+Your first task is to go into the configuration mode and change the description of **your assigned** interface. Maybe you could mark it with your name?
 
 If you have trouble doing this on your own you can find the solution down below.
 

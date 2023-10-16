@@ -2,7 +2,7 @@
 
 For this Hands-On Workshop, we will use Cisco dCloud. It provides an environment that we can connect to via VPN and where our devices are running which we will configure in different ways.
 
-Before you start and connect to the VPN, make sure you have the containers with the GitLab and Automation components up and running!
+You might have to disconnect from the VPN when starting the Containers in order to bring them up successfully.
 
 **The credentials for connecting to your dCloud Pod via VPN will be provided by your breakout proctor.**
 

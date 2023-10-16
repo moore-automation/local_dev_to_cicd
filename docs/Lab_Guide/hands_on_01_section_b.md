@@ -61,7 +61,9 @@ We will use the following small python script, which is also located on the devt
     print(output)
 ```
 
-Execute the python script using `$ python3 netmiko_interface_description.py`
+**Make sure to use the interface number that is assigned to you!**
+
+Execute the python script using `$ python3 netmiko_interface_description.py`.
 
 Once the script has been successfully executed, we can check the current interface config:
 
