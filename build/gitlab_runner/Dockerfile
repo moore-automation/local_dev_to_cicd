@@ -11,13 +11,15 @@ RUN \
   ansible \
   gcc \
   python3-dev \
+  build-essential \
   python3-pip && \
   rm -rf /var/lib/apt/lists/* && \
   echo "===> Adding localhost ..."  && \
   mkdir -p /etc/ansible/ /ansible && \
   echo "[local]\nlocalhost ansible_connection=local" > /etc/ansible/hosts && \
   echo "===> Adding playbooks volume ..."  && \
+  pip3 install setuptools==59.5.0 && \
   pip3 install pyats[full] netmiko paramiko && \
   ansible-galaxy collection install cisco.ios
 
-ENTRYPOINT ["/docker-entrypoint.sh"]
+ENTRYPOINT ["/docker-entrypoint.sh"] 
