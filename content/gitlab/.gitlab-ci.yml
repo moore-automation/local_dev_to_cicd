@@ -57,4 +57,4 @@ test_prod:
   needs: 
     - deploy_prod
   only:
-    - master
+    - main
