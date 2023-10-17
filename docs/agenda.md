@@ -42,7 +42,7 @@
     -  Validation
         -  Add linter for validation
         -  PyATS check device state
-        -  Ensure Production execution only after succesful test.
+        -  Ensure Production execution only after successful test.
 
 ### Closure/Summary - 10 minutes
 

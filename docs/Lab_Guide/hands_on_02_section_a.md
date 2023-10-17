@@ -19,11 +19,11 @@ yamllint:
 This is a pretty simple example where we're executing a single bash command, we used the `yamllint` image to build a container which linted our Ansible folder and returned success/failure. The exit code is important here as we'll be using it as a conditional step in a future task. To make things really clear i've documented them below:
 
 ```yml
-Job name:                           yamllint:
-Stage name:                           stage: validate
-Image name:                           image: registry.gitlab.com/pipeline-components/yamllint:latest
-Action:                               script:
-CLI execution:                          - yamllint Ansible
+Job name: -> yamllint:
+Stage name: ->  stage: validate
+Image name: -> image: registry.gitlab.com/pipeline-components/yamllint:latest
+Action: ->  script:
+CLI execution:  ->  - yamllint Ansible
 ```
 
 In production pipelines you should expect to see multiple lint stages depending on the specific tool/language used. In our demo example we could have used both `yamllint` and `ansible-lint` which contain different rule packages though we chose to use one for simplicity.
@@ -60,6 +60,7 @@ stages:
   - deploy
 ```
 
+We tested before the outcome of linting above, so now we'll test an 
 For both our jobs `yamllint` and `deploy_infra` you need to specify with which stage the job is associated as below:
 
 ```yml
